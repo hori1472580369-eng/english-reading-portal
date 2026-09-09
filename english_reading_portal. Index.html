@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f7f8">
+<title>英語 多読ポータル</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;color:#111}
+*{box-sizing:border-box} body{margin:0;background:#f7f7f8}
+header{position:sticky;top:0;z-index:5;background:rgba(247,247,248,.92);backdrop-filter:blur(18px);padding:calc(14px + env(safe-area-inset-top)) 16px 12px;border-bottom:1px solid #ddd}
+h1{font-size:24px;margin:0 0 5px} header p{margin:0;color:#666;font-size:13px}
+main{max-width:760px;margin:auto;padding:14px 14px 40px}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:18px}
+button,.site{font:inherit}.quick button{border:0;border-radius:13px;background:#111;color:#fff;padding:13px 10px;font-weight:700}
+.search{width:100%;padding:13px 14px;border:1px solid #d5d5d8;border-radius:13px;font-size:16px;background:white;margin-bottom:16px}
+section{scroll-margin-top:120px;margin:22px 0}.section-title{display:flex;align-items:center;gap:8px;margin:0 4px 9px;font-size:18px}
+.card{background:white;border-radius:16px;padding:7px;box-shadow:0 1px 3px #0000000b;margin-bottom:10px}
+a.site{display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:#111;padding:11px 10px;border-radius:11px}
+a.site:active{background:#f0f0f2}.name{font-weight:700}.desc{font-size:12px;color:#777;margin-top:2px}.arrow{color:#999;font-size:20px}
+.badge{font-size:11px;background:#eee;padding:3px 7px;border-radius:99px;margin-left:6px;color:#555}
+.top{display:block;text-align:center;color:#666;text-decoration:none;font-size:13px;margin:22px}
+.hidden{display:none!important}
+footer{text-align:center;color:#888;font-size:11px;padding-bottom:20px}
+</style>
+</head>
+<body>
+<header>
+  <h1>📚 英語 多読ポータル</h1>
+  <p>1日1万語を読むための「英語の玄関」</p>
+</header>
+<main>
+  <div class="quick">
+    <button onclick="go('daily')">⭐ DAILY</button>
+    <button onclick="go('psych')">🧠 心理・教育</button>
+    <button onclick="go('science')">🔬 科学</button>
+    <button onclick="go('society')">🌎 社会・政治</button>
+    <button onclick="go('history')">🏛 歴史・文化</button>
+    <button onclick="go('tech')">🤖 AI・Tech</button>
+  </div>
+  <div style="font-size:12px;color:#666;background:#fff;border-radius:13px;padding:11px 12px;margin:0 0 16px;line-height:1.55">
+<b>💡 使い方</b><br>
+各分野のサイト名をタップすると、そのサイトのトップページではなく、可能な場合は<strong>その分野に絞ったページ／検索結果</strong>へ直接移動します。
+</div><input id="search" class="search" placeholder="サイト・分野を検索…" oninput="filter()">
+
+  <section id="daily">
+    <h2 class="section-title">⭐ DAILY</h2>
+    <div class="card">
+      <a class="site" href="https://theconversation.com/" target="_blank"><span><span class="name">The Conversation</span><span class="badge">最重要</span><div class="desc">研究・社会・科学を大学研究者が解説</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.bbc.com/news" target="_blank"><span><span class="name">BBC News</span><div class="desc">世界・社会・科学・文化</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.reuters.com/" target="_blank"><span><span class="name">Reuters</span><div class="desc">国際・政治・経済・社会</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.smithsonianmag.com/" target="_blank"><span><span class="name">Smithsonian Magazine</span><div class="desc">歴史・科学・文化</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.sciencedaily.com/" target="_blank"><span><span class="name">ScienceDaily</span><div class="desc">最新研究を読みやすく紹介</div></span><span class="arrow">›</span></a>
+    </div>
+  </section>
+
+  <section id="psych">
+    <h2 class="section-title">🧠 Psychology / Education / Language</h2>
+    <div class="card">
+      <a class="site" href="https://theconversation.com/search?q=psychology" target="_blank"><span><span class="name">The Conversation — Psychology</span><div class="desc">心理学の記事を直接検索</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://theconversation.com/search?q=education" target="_blank"><span><span class="name">The Conversation — Education</span><div class="desc">教育・学習の記事を直接検索</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://theconversation.com/search?q=language" target="_blank"><span><span class="name">The Conversation — Language</span><div class="desc">言語・コミュニケーションの記事を直接検索</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.psychologytoday.com/us" target="_blank"><span><span class="name">Psychology Today</span><div class="desc">心理学・人間行動</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.scientificamerican.com/" target="_blank"><span><span class="name">Scientific American</span><div class="desc">認知・脳科学・心理</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.sciencedaily.com/news/mind_brain/psychology/" target="_blank"><span><span class="name">ScienceDaily — Psychology</span><div class="desc">心理学研究</div></span><span class="arrow">›</span></a>
+    </div>
+  </section>
+
+  <section id="science">
+    <h2 class="section-title">🔬 Science / Environment</h2>
+    <div class="card">
+      <a class="site" href="https://www.sciencedaily.com/" target="_blank"><span><span class="name">ScienceDaily</span><div class="desc">科学・研究全般</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.scientificamerican.com/" target="_blank"><span><span class="name">Scientific American</span><div class="desc">科学を深く読む</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.nationalgeographic.com/" target="_blank"><span><span class="name">National Geographic</span><div class="desc">自然・科学・文化・地理</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.nature.com/" target="_blank"><span><span class="name">Nature</span><span class="badge">難</span><div class="desc">高度な科学英語</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://theconversation.com/search?q=environment%20energy" target="_blank"><span><span class="name">The Conversation — Environment & Energy</span><div class="desc">環境・気候・エネルギーを直接検索</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.smithsonianmag.com/science-nature/" target="_blank"><span><span class="name">Smithsonian — Science</span><div class="desc">科学・自然</div></span><span class="arrow">›</span></a>
+    </div>
+  </section>
+
+  <section id="society">
+    <h2 class="section-title">🌎 Society / Politics / Globalization</h2>
+    <div class="card">
+      <a class="site" href="https://theconversation.com/search?q=politics%20society" target="_blank"><span><span class="name">The Conversation — Politics & Society</span><div class="desc">政治・社会問題を直接検索</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.vox.com/" target="_blank"><span><span class="name">Vox</span><div class="desc">社会現象を背景から解説</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.bbc.com/news/world" target="_blank"><span><span class="name">BBC World</span><div class="desc">国際情勢</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.npr.org/sections/world/" target="_blank"><span><span class="name">NPR — World</span><div class="desc">国際・社会</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.reuters.com/business/" target="_blank"><span><span class="name">Reuters — Business</span><div class="desc">経済・労働・企業</div></span><span class="arrow">›</span></a>
+    </div>
+  </section>
+
+  <section id="history">
+    <h2 class="section-title">🏛 History / Culture / Literature</h2>
+    <div class="card">
+      <a class="site" href="https://www.smithsonianmag.com/history/" target="_blank"><span><span class="name">Smithsonian — History</span><div class="desc">歴史・社会・人物</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.smithsonianmag.com/arts-culture/" target="_blank"><span><span class="name">Smithsonian — Arts & Culture</span><div class="desc">芸術・文化</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.bbc.com/culture" target="_blank"><span><span class="name">BBC Culture</span><div class="desc">文化・映画・文学・芸術</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.gutenberg.org/" target="_blank"><span><span class="name">Project Gutenberg</span><div class="desc">古典文学・小説を大量に読む</div></span><span class="arrow">›</span></a>
+    </div>
+  </section>
+
+  <section id="tech">
+    <h2 class="section-title">🤖 AI / Technology</h2>
+    <div class="card">
+      <a class="site" href="https://arstechnica.com/" target="_blank"><span><span class="name">Ars Technica</span><span class="badge">難</span><div class="desc">AI・IT・科学・テクノロジー</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.bbc.com/innovation" target="_blank"><span><span class="name">BBC Innovation</span><div class="desc">Technology・Science・Health</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://theconversation.com/search?q=science%20technology" target="_blank"><span><span class="name">The Conversation — Science & Technology</span><div class="desc">AI・科学・技術の記事を直接検索</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.scientificamerican.com/" target="_blank"><span><span class="name">Scientific American</span><div class="desc">AI・科学・未来技術</div></span><span class="arrow">›</span></a>
+    </div>
+  </section>
+
+  <section id="other">
+    <h2 class="section-title">📚 Other Fields</h2>
+    <div class="card">
+      <a class="site" href="https://www.npr.org/" target="_blank"><span><span class="name">NPR</span><div class="desc">アメリカ社会・文化・科学・政治</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.nationalgeographic.com/" target="_blank"><span><span class="name">National Geographic</span><div class="desc">自然・文化・科学</div></span><span class="arrow">›</span></a>
+      <a class="site" href="https://www.bbc.com/business" target="_blank"><span><span class="name">BBC Business</span><div class="desc">経済・仕事・企業</div></span><span class="arrow">›</span></a>
+    </div>
+  </section>
+
+  <a class="top" href="#">↑ ページ上部へ</a>
+  <footer>英語の多読用ポータル — URLは各サイトの公式ページ</footer>
+</main>
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function filter(){
+ const q=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('section').forEach(s=>{
+   const ok=s.innerText.toLowerCase().includes(q);
+   s.classList.toggle('hidden',q && !ok);
+ });
+}
+</script>
+</body>
+</html>
